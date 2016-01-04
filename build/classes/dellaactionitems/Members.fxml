@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="640.0" prefWidth="623.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dellaactionitems.MembersController">
+  <children>
+      <Pane layoutY="69.0" />
+      <VBox layoutX="425.0" layoutY="93.0" />
+      <TextField alignment="CENTER" editable="false" layoutY="44.0" prefHeight="25.0" prefWidth="623.0" text="Members">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </TextField>
+      <HBox layoutY="2.0">
+         <children>
+            <Button layoutY="2.0" maxWidth="124.6" mnemonicParsing="false" onAction="#goToConsole" prefWidth="124.6" text="Console">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Button>
+            <Button layoutX="70.0" layoutY="10.0" maxWidth="124.6" mnemonicParsing="false" onAction="#goToActionItems" prefWidth="124.6" text="Action Items">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Button>
+            <Button layoutX="154.0" layoutY="10.0" maxWidth="124.6" mnemonicParsing="false" prefWidth="124.6" text="Members">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Button>
+            <Button layoutX="264.0" layoutY="10.0" maxWidth="124.6" mnemonicParsing="false" onAction="#goToTeams" prefWidth="124.6" text="Teams">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Button>
+            <Button layoutX="383.0" layoutY="12.0" maxWidth="124.6" mnemonicParsing="false" prefWidth="124.6" text="Quit">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <Label layoutY="85.0" text="Name of some one new(last,first,midle) :">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField layoutY="102.0" prefHeight="25.0" prefWidth="188.0" />
+      <Button layoutX="254.0" layoutY="105.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="134.0" text="Add to list-&gt;" />
+      <Button layoutX="254.0" layoutY="177.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="134.0" text="&lt;-Remove from list" />
+      <Label layoutX="406.0" layoutY="85.0" text="Names Known By Della:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField layoutX="406.0" layoutY="102.0" prefHeight="184.0" prefWidth="217.0" />
+      <Label layoutX="257.0" layoutY="229.0" text="Check on individuvals&#10;to see affiliations">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutY="408.0" text="Names Known By Della:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField layoutY="442.0" prefHeight="184.0" prefWidth="217.0" />
+      <TextField layoutX="406.0" layoutY="442.0" prefHeight="184.0" prefWidth="217.0" />
+      <Label layoutX="406.0" layoutY="408.0" text="Names Known By Della:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Button layoutX="249.0" layoutY="479.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="134.0" text="Add Affiliation-&gt;" />
+      <Button layoutX="249.0" layoutY="560.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="134.0" text="&lt;-Remove Affiliation" />
+      <Label layoutX="1.0" layoutY="425.0" text="x" />
+      <Label layoutX="406.0" layoutY="425.0" text="x" />
+      <Label layoutY="157.0" text="1) Click on the box above." />
+      <Label layoutY="143.0" text="To add a name to the list:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutY="171.0" text="2) Type the name." />
+      <Label layoutY="187.0" text="3) Click on the &quot;Add to list&quot; button." />
+      <Label layoutY="239.0" text="To remove a name from the list: ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutY="271.0" text="2) Click on the &quot;Remove from the list&quot; button." />
+      <Label layoutY="253.0" text="1) Click on the name to remove ." />
+      <Label layoutY="309.0" text="To add a team affiliation for an individuval:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutY="341.0" text="2) Click on team name in list below." />
+      <Label layoutY="357.0" text="3) Click on &quot;Add Affiliation&quot; button." />
+      <Label layoutY="323.0" text="1) Click on the name of individuval from above right." />
+      <Label layoutX="358.0" layoutY="309.0" text="To remove a team affiliation for an individuval:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="358.0" layoutY="357.0" text="3) Click on &quot;Remove Affiliation&quot; button." />
+      <Label layoutX="358.0" layoutY="323.0" text="1) Click on the name of individuval from above." />
+      <Label layoutX="358.0" layoutY="341.0" text="2) Click on team name in list below." />
+   </children>
+</AnchorPane>
