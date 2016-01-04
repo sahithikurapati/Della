@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 package DBPack;
-
-import della.MemberNode;
+import della.TeamNode;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -16,7 +15,7 @@ import java.util.ArrayList;
  *
  * @author anuroop
  */
-public class MemberDB {
+public class TeamsDB {
   private String MYSQL_DRIVER = "com.mysql.jdbc.Driver";
   private String MYSQL_URL = "jdbc:mysql://localhost:3306/test";
 
@@ -24,14 +23,14 @@ public class MemberDB {
   private Statement st;
   private ResultSet rs;
   
-  public MemberDB() {
+  public TeamsDB() {
        try {
       Class.forName(MYSQL_DRIVER);
       System.out.println("Class Loaded....");
       con = DriverManager.getConnection(MYSQL_URL,"root","password");
       System.out.println("Connected to the database....");
       st = con.createStatement();
-      int c = 0;/*st.executeUpdate("CREATE TABLE members ("
+      int c =0;/*st.executeUpdate("CREATE TABLE teams ("
               + "Name VARCHAR(30)"
               +");");*/
       System.out.println("Table have been created.");
@@ -48,18 +47,18 @@ public class MemberDB {
     }
   }
   /**
-   * create sql statement to retrieve all members 
+   * create sql statement to retrieve all teams 
    * @return 
    */
-  public ArrayList<String> getMembers(){
+  public ArrayList<String> getTeams(){
       return null;
   }
+  
   /**
-   * adds a member to table
+   * adds a team to table
    * @param name 
    */
   public void addMember(String name) {
       
   }
-    
 }

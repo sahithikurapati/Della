@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import dellaactionitems.ActionItemNode;
+import della.ActionItemNode;
 /**
  *
  * @author anuroop
@@ -32,7 +32,7 @@ public class ActionDb {
       con = DriverManager.getConnection(MYSQL_URL,"root","password");
       System.out.println("Connected to the database....");
       st = con.createStatement();
-      int c =st.executeUpdate("CREATE TABLE ActionItems ("
+      int c =st.executeUpdate("CREATE TABLE ActionItems IF NOT EXISTS ("
               + "Name VARCHAR(30)"
               + ",Description VARCHAR(50)"
               + ",Resolution VARCHAR(50)"
