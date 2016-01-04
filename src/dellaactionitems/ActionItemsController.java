@@ -198,8 +198,9 @@ public class ActionItemsController implements Initializable,ControlledScreen{
             errorCause = "duplicate anction name.";
             errorHandling = "choose new action Name";
             new AlertMessage(errorHead,errorCause,errorHandling);
+            return;
         } 
-        else
+        else if(check())
         {
             String idate = "";
             ActionItemNode temp = new ActionItemNode();
