@@ -50,9 +50,9 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField layoutY="102.0" prefHeight="25.0" prefWidth="188.0" />
-      <Button layoutX="254.0" layoutY="105.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="134.0" text="Add to list-&gt;" />
-      <Button layoutX="254.0" layoutY="177.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="134.0" text="&lt;-Remove from list" />
+      <TextField fx:id="memname" layoutY="102.0" prefHeight="25.0" prefWidth="188.0" />
+      <Button layoutX="254.0" layoutY="105.0" mnemonicParsing="false" onAction="#addMember" prefHeight="34.0" prefWidth="134.0" text="Add to list-&gt;" />
+      <Button layoutX="254.0" layoutY="177.0" mnemonicParsing="false" onAction="#removeMember" prefHeight="34.0" prefWidth="134.0" text="&lt;-Remove from list" />
       <Label layoutX="406.0" layoutY="85.0" text="Names Known By Della:">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -63,7 +63,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutY="408.0" text="Names Known By Della:">
+      <Label layoutY="408.0" text="Available Teams For:">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -73,10 +73,10 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Button layoutX="249.0" layoutY="479.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="134.0" text="Add Affiliation-&gt;" />
-      <Button layoutX="249.0" layoutY="560.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="134.0" text="&lt;-Remove Affiliation" />
-      <Label layoutX="1.0" layoutY="425.0" text="x" />
-      <Label layoutX="406.0" layoutY="425.0" text="x" />
+      <Button layoutX="249.0" layoutY="479.0" mnemonicParsing="false" onAction="#addAssociation" prefHeight="34.0" prefWidth="134.0" text="Add Affiliation-&gt;" />
+      <Button layoutX="249.0" layoutY="560.0" mnemonicParsing="false" onAction="#removeAssociation" prefHeight="34.0" prefWidth="134.0" text="&lt;-Remove Affiliation" />
+      <Label fx:id="name" layoutX="1.0" layoutY="425.0" text="x" />
+      <Label fx:id="name2" layoutX="406.0" layoutY="425.0" text="x" />
       <Label layoutY="157.0" text="1) Click on the box above." />
       <Label layoutY="143.0" text="To add a name to the list:">
          <font>
@@ -108,10 +108,10 @@
       <Label layoutX="358.0" layoutY="357.0" text="3) Click on &quot;Remove Affiliation&quot; button." />
       <Label layoutX="358.0" layoutY="323.0" text="1) Click on the name of individuval from above." />
       <Label layoutX="358.0" layoutY="341.0" text="2) Click on team name in list below." />
-      <ListView layoutX="402.0" layoutY="112.0" prefHeight="184.0" prefWidth="217.0" />
-      <ListView layoutY="442.0" prefHeight="184.0" prefWidth="217.0" />
-      <ListView layoutX="409.0" layoutY="442.0" prefHeight="184.0" prefWidth="217.0" />
-      <Label layoutX="565.0" layoutY="26.0" prefHeight="17.0" prefWidth="54.0" text="offline">
+      <ListView fx:id="allMembers" layoutX="402.0" layoutY="112.0" onMouseClicked="#selectedMem" prefHeight="184.0" prefWidth="217.0" />
+      <ListView fx:id="availteams" layoutY="442.0" onMouseClicked="#selectedTeam" prefHeight="184.0" prefWidth="217.0" />
+      <ListView fx:id="curteams" layoutX="409.0" layoutY="442.0" onMouseClicked="#selectedTeamToRemove" prefHeight="184.0" prefWidth="217.0" />
+      <Label fx:id="onof" layoutX="565.0" layoutY="26.0" prefHeight="17.0" prefWidth="54.0" text="offline">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

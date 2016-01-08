@@ -23,19 +23,19 @@
                   <Font name="System Bold" size="11.0" />
                </font>
             </Label>
-            <ComboBox fx:id="SortingDirection" layoutX="150.0" layoutY="166.0" prefHeight="25.0" prefWidth="145.0" />
+            <ComboBox fx:id="SortingDirection" layoutX="150.0" layoutY="166.0" onAction="#setOrder" prefHeight="25.0" prefWidth="145.0" />
             <Label layoutX="300.0" layoutY="148.0" prefHeight="18.0" prefWidth="105.0" text="First Sorting Factor:">
                <font>
                   <Font name="System Bold" size="11.0" />
                </font>
             </Label>
-            <ComboBox fx:id="fSortingFactor" layoutX="300.0" layoutY="166.0" prefHeight="25.0" prefWidth="159.0" />
+            <ComboBox fx:id="fSortingFactor" layoutX="300.0" layoutY="166.0" onAction="#setFirstDir" prefHeight="25.0" prefWidth="159.0" />
             <Label layoutX="464.0" layoutY="148.0" prefHeight="18.0" prefWidth="130.0" text="Second Sorting Factor:">
                <font>
                   <Font name="System Bold" size="11.0" />
                </font>
             </Label>
-            <ComboBox fx:id="sSortingFactor" layoutX="464.0" layoutY="166.0" prefHeight="25.0" prefWidth="159.0" />
+            <ComboBox fx:id="sSortingFactor" layoutX="464.0" layoutY="166.0" onAction="#setSecondDir" prefHeight="25.0" prefWidth="159.0" />
          </children>
       </VBox>
       <Label layoutX="2.0" layoutY="273.0" prefHeight="18.0" prefWidth="149.0" text="Selected Action Item:">
@@ -98,9 +98,6 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <ComboBox fx:id="status" layoutX="499.0" layoutY="431.0" prefHeight="25.0" prefWidth="74.0" />
-      <ComboBox fx:id="member" layoutX="432.0" layoutY="510.0" prefHeight="25.0" prefWidth="145.0" />
-      <ComboBox fx:id="team" layoutX="434.0" layoutY="567.0" prefHeight="25.0" prefWidth="145.0" />
       <TextField alignment="CENTER" editable="false" layoutY="44.0" prefHeight="25.0" prefWidth="623.0" text="Console">
          <font>
             <Font name="System Bold" size="13.0" />
@@ -142,10 +139,13 @@
          </font>
       </Label>
       <ListView fx:id="list" layoutX="2.0" layoutY="100.0" onMouseClicked="#setFields" prefHeight="159.0" prefWidth="409.0" />
-      <Label layoutX="567.0" layoutY="26.0" prefHeight="17.0" prefWidth="54.0" text="offline">
+      <Label fx:id="onof" layoutX="567.0" layoutY="26.0" prefHeight="17.0" prefWidth="54.0" text="offline">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
+      <Label fx:id="member" layoutX="433.0" layoutY="517.0" text="-no member assigned-" />
+      <Label fx:id="team" layoutX="433.0" layoutY="568.0" text="-no team assigned-" />
+      <Label fx:id="status" layoutX="503.0" layoutY="435.0" text="x" />
    </children>
 </AnchorPane>

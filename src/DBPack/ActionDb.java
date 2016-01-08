@@ -105,7 +105,7 @@ public class ActionDb {
           ActionItemNode temp;
           ArrayList<ActionItemNode> result = new ArrayList<>();
           System.out.println("retrieving data!");
-          String sql = "SELECT * FROM ActionItems";
+          String sql = "SELECT * FROM ActionItems order by Name";
           
           ResultSet rs = st.executeQuery(sql);
           System.out.println("done retrieving and storing to collection....");
@@ -149,5 +149,55 @@ public class ActionDb {
        catch(Exception ex){ex.printStackTrace();}
       return null;
   }
-
+  public void deleteActionItem(String name){
+      try{
+          
+          String remove = "delete from actionitems where name ="+
+                            "\""+name+"\";"; 
+          st.execute(remove);
+          
+          System.out.println("removed successfully");
+      }catch(Exception e) {e.printStackTrace();}
+  }
+  public ArrayList<ActionItemNode> getSorted(String firstDir, String secondDir, String order){
+       try{
+          ActionItemNode temp;
+          ArrayList<ActionItemNode> result = new ArrayList<>();
+          System.out.println("retrieving data!");
+          
+          String sql = "SELECT * FROM ActionItems order by ";
+          if(!firstDir.equals("")){
+              sql += firstDir;
+          }
+          if(!secondDir.equals("")){
+              if(!firstDir.equals("")) sql += ",";
+              sql += " "+secondDir;
+          }
+          sql += " "+order +";";
+          System.out.println(sql);
+          ResultSet rs4 = st.executeQuery(sql);
+          System.out.println("done retrieving and storing to collection....");
+      //STEP 5: Extract data from result set
+         while(rs4.next()){
+         //Retrieve by column name
+         System.out.println("waiting for next record..");
+         temp = new ActionItemNode();
+         temp.name = rs4.getNString(1);
+         temp.description = rs4.getNString(2);
+         temp.resolution = rs4.getNString(3);
+         temp.team = rs4.getNString(4);
+         temp.member = rs4.getNString(5);
+         temp.status = rs4.getNString(6);
+         temp.creation = rs4.getNString(7);
+         temp.due = rs4.getNString(8);
+         System.out.println(temp);
+         result.add(temp);
+      }
+      rs4.close();
+      return result;
+      }
+      catch(Exception e){e.printStackTrace();}
+      
+      return null;
+  }
 }

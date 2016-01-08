@@ -11,6 +11,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.StringTokenizer;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -40,6 +44,8 @@ public class ActionItemsController implements Initializable,ControlledScreen{
 
     @FXML
     private Label date;
+    @FXML
+    private Label onof;
     //--------------------------
     @FXML
     private ComboBox list;
@@ -76,6 +82,7 @@ public class ActionItemsController implements Initializable,ControlledScreen{
     private Button create;
     @FXML
     private Button Delete;
+    boolean connectivity = false;
     //--------------------------   
     /**
      * creating variables to store 
@@ -101,11 +108,16 @@ public class ActionItemsController implements Initializable,ControlledScreen{
     ArrayList<String> teamsData = new ArrayList<>();
     ArrayList<String> listData = new ArrayList<>();
     DBPack.ActionDb object;
+    boolean setMFlag = false;
+    boolean setTFlag = false;
     //--------------------------
     String errorHead = "";
     String errorCause = "";
     String errorHandling = "";
     String mname = "";
+    String order = "";
+    String firstDir = "";
+    String secondDir = "";
     //--------------------------
     /**
      * checks weather date is valid compared to present or creation date.
@@ -184,6 +196,10 @@ public class ActionItemsController implements Initializable,ControlledScreen{
      * Event listener linked to create button.
      */
     private void createAction(ActionEvent event) {
+        if(!connectivity){
+            new AlertMessage("presently unavailable","offline mode running","");
+            return;
+        }
         boolean flag = false;
         
             for(ActionItemNode x : items ) {
@@ -241,15 +257,21 @@ public class ActionItemsController implements Initializable,ControlledScreen{
      *  list and fills the corresponding data.
      */
     private void listEvent(ActionEvent event) {
+        String dummy = "";
         //code to be implemented when user is oline
         String value = list.getValue().toString();
-        mname = value;
+        StringTokenizer st = new StringTokenizer(value,":");
+        int i = 1;
+        while(st.hasMoreTokens()) {dummy = st.nextToken();}
+        mname = dummy;
+        value = dummy;
         ActionItemNode temp = object.getValues(value);
         
         name.setText(temp.name);
         description.setText(temp.description);
         resolution.setText(temp.resolution);
-        
+        membersList(true);
+        teamsList(true);
         due.setText(temp.due);
         if(temp.team.equals("none")) team.setValue("-no team selected-");
         else team.setValue(temp.team);
@@ -258,6 +280,10 @@ public class ActionItemsController implements Initializable,ControlledScreen{
     }
     @FXML
     private void updateAction(ActionEvent event) {
+        if(!connectivity){
+            new AlertMessage("presently unavailable","offline mode running","");
+            return;
+        }
         /*boolean cflag = false;
         if(cflag == false){
             errorHead = "unable to update/create Action Item";
@@ -333,12 +359,217 @@ public class ActionItemsController implements Initializable,ControlledScreen{
         //temp.member = member.getValue().toString();
           
     }
+    @FXML 
+    private void deleteAction(ActionEvent event){
+        if(!connectivity){
+            new AlertMessage("presently unavailable","offline mode running","");
+            return;
+        }
+        String names = name.getText();
+        object.deleteActionItem(names);
+        name.setText("");
+        description.setText("");
+        resolution.setText("");
+        due.setText("");
+        member.setValue("-no member selected-");
+        team.setValue("-no team selected-");
+        updateList();
+    }
+    @FXML
+   private void setTeamFromMembers(ActionEvent event){
+       setTFlag = true;
+       if(!setMFlag){
+           String name = member.getValue().toString();
+           if(name.equals("-no member selected-")) {teamsList(true);return;}
+           ArrayList<String> teams = new DBPack.MemberDB().getCurTeams(name);
+           team.getItems().clear();
+           for(String x : teams) {
+               team.getItems().add(x);
+           }
+           team.getItems().add(0,"-no team selected-");
+           team.setValue("-no team selected-");
+           setMFlag = false;
+       }
+   }
+   @FXML
+   private void setMembersFromTeam(ActionEvent event){
+       setMFlag = true;
+       if(!setTFlag){
+           String name = team.getValue().toString();
+           if(name.equals("-no team selected-")) {membersList(true);return;}
+           ArrayList<String> members = new DBPack.TeamsDB().getCurMembers(name);
+           member.getItems().clear();
+           for(String x : members) {
+               member.getItems().add(x);
+           }
+           member.getItems().add(0,"-no member selected-");
+           member.setValue("-no member selected-");
+           setTFlag = false;
+       }
+   }
+   @FXML
+   private void setOrder(ActionEvent event){
+       if(SortingDirection.getValue().toString().equals("small to large")){
+           order = "asc";
+       }
+       else{
+           order = "desc";
+       }
+   }
+   @FXML
+   private void setFirstDir(ActionEvent event){
+       String value = fSortingFactor.getValue().toString();
+       switch(value){
+           case "none":{
+               firstDir = "";
+               break;
+           }
+           case "created date":{
+            firstDir = "created"; 
+            break;
+           }
+           case "due date":{
+               firstDir = "dued";
+               break;
+           }
+           case "assigned member":{
+               firstDir = "Member";
+               break;
+           }
+           case "assigned team":{
+               firstDir = "Team";
+               break;
+           }
+               
+       }
+       updateList(true);
+   }
+    @FXML
+   private void setSecondDir(ActionEvent event){
+       String value = sSortingFactor.getValue().toString();
+       switch(value){
+           case "none":{
+               secondDir = "";
+               break;
+           }
+           case "created date":{
+            secondDir = "created"; 
+            break;
+           }
+           case "due date":{
+               secondDir = "dued";
+               break;
+           }
+           case "assigned member":{
+               secondDir = "Member";
+               break;
+           }
+           case "assigned team":{
+               secondDir = "Team";
+               break;
+           }
+               
+       }
+       updateList(true);
+   }
+   
+   public void membersList(boolean flag){
+       member.getItems().clear();
+       ArrayList<String> members = new DBPack.MemberDB().getMembers();
+       for(String x : members) {
+           member.getItems().add(x);
+       }
+       member.getItems().add(0,"-no member selected-");
+   }
+   
+   public void teamsList(boolean flag){
+       team.getItems().clear();
+        ArrayList<String> teams = new DBPack.TeamsDB().getTeams();
+        for(String x : teams) {
+            
+           team.getItems().add(x);
+       }
+       team.getItems().add(0,"-no team selected-");        
+   }
+   public void updateList(boolean bx){
+       String temp = "";
+       listData.clear();
+        
+        //System.out.println("-----------------"+result.get(0));
+         
+        
+        ArrayList<ActionItemNode> result = object.getSorted(firstDir,secondDir,order);
+        for(ActionItemNode x : result) {
+            switch(firstDir){
+           case "none":{
+               
+               break;
+           }
+           case "created":{
+            temp += x.creation+":"; 
+            break;
+           }
+           case "dued":{
+               temp += x.due+":";
+               break;
+           }
+           case "Member":{
+               temp += x.member+":";
+               break;
+           }
+           case "Team":{
+               temp += x.team;
+               break;
+           }            
+           }
+            switch(secondDir){
+           case "none":{
+               
+               break;
+           }
+           case "created":{
+            temp += x.creation+":"; 
+            break;
+           }
+           case "dued":{
+               temp += x.due+":";
+               break;
+           }
+           case "Member":{
+               temp += x.member+":";
+               break;
+           }
+           case "Team":{
+               temp += x.team;
+               break;
+           }
+            }
+           temp += x.name;
+            listData.add(temp);
+            temp = "";
+        }
+        list.getItems().clear();
+        list.getItems().addAll(listData);
+   }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-
-        object = new DBPack.ActionDb();
         
+        object = new DBPack.ActionDb();
+        ScheduledExecutorService executor =
+        Executors.newSingleThreadScheduledExecutor();
+        Runnable periodicTask = new Runnable() {
+        public void run() {
+        // Invoke method(s) to do the work
+        connectivity = new DBPack.MainBase().getInternetStatus();
+        if(connectivity){
+            onof.setText("online");
+        }
+        else onof.setText("offline");
+        
+        }
+        };
+        executor.scheduleAtFixedRate(periodicTask, 0, 3, TimeUnit.SECONDS);
         updateList();
         Date dt = new Date();
         statusData.add("open");
@@ -354,9 +585,9 @@ public class ActionItemsController implements Initializable,ControlledScreen{
         inclusionFactorData.add("Open Action Items");
         inclusionFactorData.add("Closed Action Items");
         teamsData.add("-no team selected-");
-        teamsData.add("sample");
+        
         membersData.add("-no member selected-");
-        membersData.add("sample");
+        
         team.getItems().addAll(teamsData);
         member.getItems().addAll(membersData);
         status.getItems().addAll(statusData);
@@ -373,8 +604,9 @@ public class ActionItemsController implements Initializable,ControlledScreen{
         sSortingFactor.setValue("none");
         // wiil be implemented when the fxml document is inititalized.
         //i think we can call other methods or objects of class from here. 
-        date.setText(Integer.toString(dt.getDate())+"-"+Integer.toString(dt.getMonth())+"-"+Integer.toString(1900+dt.getYear()));
-        
+        date.setText(Integer.toString(dt.getDate())+"-"+Integer.toString(1+dt.getMonth())+"-"+Integer.toString(1900+dt.getYear()));
+        membersList(true);
+        teamsList(true);
     }    
     
 }

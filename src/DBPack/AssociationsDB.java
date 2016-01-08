@@ -48,8 +48,6 @@ public class AssociationsDB {
     }
   }
   
-  public void addAssociation(String mname,String tname) {
-      
-  }
+  
   
 }
