@@ -173,6 +173,9 @@ public class ActionDb {
               if(!firstDir.equals("")) sql += ",";
               sql += " "+secondDir;
           }
+          if(firstDir.equals("") && secondDir.equals("") ){
+              sql += " "+"name";
+          }
           sql += " "+order +";";
           System.out.println(sql);
           ResultSet rs4 = st.executeQuery(sql);

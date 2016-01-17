@@ -91,8 +91,13 @@ public class MembersController implements Initializable,ControlledScreen{
     private void addMember(ActionEvent event) {
         if(!connectivity){
             new AlertMessage("presently unavailable","offline mode running","");
+            return;
         }
         mName = memname.getText();
+        if(mName == null || mName.equals(null) || mName.equals("")){
+            new AlertMessage("unable to add member","enter some name","");
+            return;
+        }
         if(!object.isPresent(mName) && mName != null){
             object.addMember(mName);
             updateList();
@@ -106,6 +111,7 @@ public class MembersController implements Initializable,ControlledScreen{
         mName = allMembers.getSelectionModel().getSelectedItem();
         name.setText(mName);
         name2.setText(mName);
+        tName = null;
         availTeams();
         updateCurTeams();
     }
@@ -123,9 +129,14 @@ public class MembersController implements Initializable,ControlledScreen{
             new AlertMessage("presently unavailable","offline mode running","");
             return;
         }
+        if(mName == "" || tName == "" || tName == null) {
+            new AlertMessage("select member/team","","please select a member\nand team for a \nsuccessfull remove");
+            return;
+        }
         object.addAssociation(mName, tName);
         updateCurTeams();
         availTeams();
+        tName = null;
     }
     @FXML
     private void removeAssociation(ActionEvent event) {
@@ -133,13 +144,14 @@ public class MembersController implements Initializable,ControlledScreen{
             new AlertMessage("presently unavailable","offline mode running","");
             return;
         }
-        if(mName == "" || tName == "" ) {
+        if(mName == "" || tName == "" || tName == null) {
             new AlertMessage("select member/team","","please select a member\nand team for a \nsuccessfull remove");
             return;
         }
         object.removeAssociation(mName,tName);
         updateCurTeams();
         availTeams();
+        tName = null;
     }
     @FXML
     private void removeMember(ActionEvent event) {
@@ -147,7 +159,7 @@ public class MembersController implements Initializable,ControlledScreen{
             new AlertMessage("presently unavailable","offline mode running","");
             return;
         }
-        if(mName == ""){
+        if(mName == "" || mName == null){
             new AlertMessage("delete uncessful","select a member","");
             return;
         }
@@ -156,6 +168,7 @@ public class MembersController implements Initializable,ControlledScreen{
         name.setText("");
         name2.setText("");
         availteams.getItems().clear();
+        mName = null;
     }
     public void availTeams() {
        String memname = name.getText();

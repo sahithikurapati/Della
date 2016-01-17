@@ -82,7 +82,7 @@ public class ActionItemsController implements Initializable,ControlledScreen{
     private Button create;
     @FXML
     private Button Delete;
-    boolean connectivity = false;
+    boolean connectivity = true;
     //--------------------------   
     /**
      * creating variables to store 
@@ -299,6 +299,7 @@ public class ActionItemsController implements Initializable,ControlledScreen{
         boolean nflag = false;
         
         value = name.getText();
+        listData.remove(value);
         for(String iterator : listData) {
             if(iterator.equals(value)) {
                 nflag = true;
@@ -415,6 +416,7 @@ public class ActionItemsController implements Initializable,ControlledScreen{
        else{
            order = "desc";
        }
+       updateList(true);
    }
    @FXML
    private void setFirstDir(ActionEvent event){

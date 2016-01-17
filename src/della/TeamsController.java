@@ -48,8 +48,8 @@ public class TeamsController implements Initializable,ControlledScreen{
     //--------------------------
     TeamsDB object;
     MemberDB mObject;
-    String tName = "";
-    String mName = "";
+    String tName = null;
+    String mName = null;
     String errorHead = "";
     String errorCause = "";
     String errorHandling = "";
@@ -101,7 +101,7 @@ public class TeamsController implements Initializable,ControlledScreen{
             return;
         }
         tName = teamName.getText();
-        if(tName == null || tName == "") {
+        if(tName == null || tName.equals("")) {
             new AlertMessage("adding failed","enter a valid team name","");
             return;
         }
@@ -134,6 +134,7 @@ public class TeamsController implements Initializable,ControlledScreen{
         tName = allTeams.getSelectionModel().getSelectedItem();
         team.setText(tName);
         team2.setText(tName);
+        mName = null;
         updateCurMembers();
         updateAvailMembers();
     }
@@ -152,10 +153,15 @@ public class TeamsController implements Initializable,ControlledScreen{
             new AlertMessage("presently unavailable","offline mode running","");
             return;
         }
+        if(mName == "" || tName == "" || tName == null) {
+            new AlertMessage("select member/team","","please select a member\nand team for a \nsuccessfull remove");
+            return;
+        }
         tName = team.getText();
         mObject.addAssociation(mName, tName);
         updateCurMembers();
         updateAvailMembers();
+        mName = null;
     }
     @FXML
     private void removeAssociation(ActionEvent event){
@@ -163,14 +169,14 @@ public class TeamsController implements Initializable,ControlledScreen{
             new AlertMessage("presently unavailable","offline mode running","");
             return;
         }
-        if(mName == "" || tName == "" ) {
+        if(mName == "" || tName == "" || tName == null) {
             new AlertMessage("select member/team","","please select a member\nand team for a \nsuccessfull remove");
             return;
         }
         mObject.removeAssociation(mName,tName);
         updateCurMembers();
         updateAvailMembers();
-        mName = "";
+        mName = null;
     }
     private void updateList(){
         listItems = object.getTeams();

@@ -24,49 +24,30 @@ public class MainBase {
    static final String PASS = "password";
    
    public static void main(String[] args) {
-   Connection conn = null;
-   Statement stmt = null;
-   try{
-      //STEP 2: Register JDBC driver
-      Class.forName("com.mysql.jdbc.Driver");
-
-      //STEP 3: Open a connection
-      System.out.println("Connecting to database...");
-      conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-      //STEP 4: Execute a query
-      System.out.println("Creating database...");
-      stmt = conn.createStatement();
-      
-      String sql = "CREATE DATABASE STUDENTS";
-      stmt.executeUpdate(sql);
-      System.out.println("Database created successfully...");
-   }catch(SQLException | ClassNotFoundException se){
-   }
-   System.out.println("Goodbye!");
+   
 }//end main
 	public boolean getInternetStatus(){
 		try{
-			final String authUser = "201585103";
-			final String authPassword = "msit123";
+			final String userName = "201585138";
+			final String password = "msit123";
 			Authenticator.setDefault(
 			   new Authenticator() {
 			      public PasswordAuthentication getPasswordAuthentication() {
 			         return new PasswordAuthentication(
-			               authUser, authPassword.toCharArray());
+			               userName, password.toCharArray());
 			      }
 			   }
 			);
 
-			System.setProperty("http.proxyUser", authUser);
-			System.setProperty("http.proxyPassword", authPassword);
+			System.setProperty("http.proxyUser", userName);
+			System.setProperty("http.proxyPassword", password);
 			System.setProperty("http.proxyHost", "10.10.10.3");
-            System.setProperty("http.proxyPort", "3128");
+                        System.setProperty("http.proxyPort", "3128");
 			URL url = new URL("http://www.google.co.in");
 			System.out.println(url.getHost());
-			HttpURLConnection con = (HttpURLConnection)url.openConnection();
-			con.connect();
-			if(con.getResponseCode() == 200){
+			HttpURLConnection connect = (HttpURLConnection)url.openConnection();
+			connect.connect();
+			if(connect.getResponseCode() == 200){
 				return true;
 			}
 

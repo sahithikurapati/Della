@@ -107,6 +107,7 @@ public class ConsoleController implements Initializable,ControlledScreen{
        else{
            order = "desc";
        }
+       updateList(true);
    }
    @FXML
    private void setFirstDir(ActionEvent event){
@@ -182,7 +183,7 @@ public class ConsoleController implements Initializable,ControlledScreen{
     public void updateList(boolean bx) {
         String temp = "";
         System.out.println("==>updating list!");
-        items = object.getValues();
+        items = object.getSorted(firstDir,secondDir,order);
         ObservableList listData = FXCollections.observableArrayList();
        listData.clear();
         for(ActionItemNode x : items) {
