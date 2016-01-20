@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="640.0" prefWidth="623.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="della.ActionItemsController">
+   <children>
+      
+      <Pane layoutY="69.0">
+         <children>
+            <Label prefHeight="18.0" prefWidth="68.0" text="Action Item:">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="list" layoutY="18.0" onAction="#listEvent" prefHeight="25.0" prefWidth="623.0" />
+         </children>
+      </Pane>
+      <Label layoutX="14.0" layoutY="112.0" prefHeight="17.0" prefWidth="446.0" text="Select an Action Item from the pull-down list above to examine and update it.">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="inclusionFactor" layoutY="166.0" prefHeight="25.0" prefWidth="145.0" />
+      <Label layoutY="148.0" prefHeight="18.0" prefWidth="96.0" text="Inclusion Factor:">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+      </Label>
+      <Label layoutX="150.0" layoutY="148.0" prefHeight="18.0" prefWidth="96.0" text="Sorting Direction:">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="SortingDirection" layoutX="150.0" layoutY="166.0" onAction="#setOrder" prefHeight="25.0" prefWidth="145.0" />
+      <ComboBox fx:id="fSortingFactor" layoutX="300.0" layoutY="166.0" onAction="#setFirstDir" prefHeight="25.0" prefWidth="159.0" />
+      <ComboBox fx:id="sSortingFactor" layoutX="464.0" layoutY="166.0" onAction="#setSecondDir" prefHeight="25.0" prefWidth="159.0" />
+      <Label layoutX="300.0" layoutY="148.0" prefHeight="18.0" prefWidth="105.0" text="First Sorting Factor:">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+      </Label>
+      <Label layoutX="464.0" layoutY="148.0" prefHeight="18.0" prefWidth="130.0" text="Second Sorting Factor:">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+      </Label>
+      <Label layoutY="202.0" prefHeight="18.0" prefWidth="149.0" text="Selected Action Item:">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+      </Label>
+      <TextField fx:id="name" layoutX="40.0" layoutY="221.0" prefHeight="25.0" prefWidth="367.0" />
+      <Label layoutX="2.0" layoutY="224.0" prefHeight="18.0" prefWidth="38.0" text="Name:">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+      </Label>
+      <TextField fx:id="description" alignment="TOP_LEFT" layoutY="289.0" prefHeight="134.0" prefWidth="409.0" />
+      <Label layoutX="2.0" layoutY="265.0" prefHeight="18.0" prefWidth="63.0" text="Description:">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+      </Label>
+      <Label layoutX="2.0" layoutY="428.0" prefHeight="18.0" prefWidth="63.0" text="Resolution">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+      </Label>
+      <TextField fx:id="resolution" alignment="TOP_LEFT" layoutY="452.0" prefHeight="134.0" prefWidth="409.0" />
+      <Label layoutX="429.0" layoutY="289.0" prefHeight="18.0" prefWidth="63.0" text="Date:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="424.0" layoutY="366.0" prefHeight="18.0" prefWidth="74.0" text="Action Item:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="429.0" layoutY="452.0" prefHeight="18.0" prefWidth="123.0" text="Assigned To Member:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="429.0" layoutY="501.0" prefHeight="18.0" prefWidth="111.0" text="Assigned To Team:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label contentDisplay="RIGHT" layoutX="445.0" layoutY="302.0" prefHeight="18.0" prefWidth="54.0" text="Creation:" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="date" layoutX="501.0" layoutY="303.0" text="Label" />
+      <Label contentDisplay="RIGHT" layoutX="468.0" layoutY="342.0" prefHeight="18.0" prefWidth="28.0" text="Due:" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="due" layoutX="496.0" layoutY="339.0" prefHeight="25.0" prefWidth="123.0" />
+      <Label contentDisplay="RIGHT" layoutX="458.0" layoutY="394.0" prefHeight="18.0" prefWidth="44.0" text="Status:" textAlignment="RIGHT">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="status" layoutX="497.0" layoutY="391.0" prefHeight="25.0" prefWidth="74.0" />
+      <ComboBox fx:id="member" layoutX="430.0" layoutY="470.0" onAction="#setTeamFromMembers" prefHeight="25.0" prefWidth="145.0" />
+      <ComboBox fx:id="team" layoutX="432.0" layoutY="527.0" onAction="#setMembersFromTeam" prefHeight="25.0" prefWidth="145.0" />
+      <Button fx:id="update" layoutY="594.0" mnemonicParsing="false" onMouseEntered="#changeCurUp"  onAction="#updateAction" prefHeight="25.0" prefWidth="153.25" text="Update This Action Item" />
+      <Button fx:id="clear" layoutX="154.0" layoutY="594.0" mnemonicParsing="false" onAction="#clearAction" prefHeight="25.0" prefWidth="153.25" text="Clear This Form" />
+      <Button fx:id="Delete" layoutX="461.0" layoutY="594.0" mnemonicParsing="false" onMouseEntered="#changeCurDel"  onAction="#deleteAction" prefHeight="25.0" prefWidth="159.0" text="Delete This Action Item" />
+      <Button fx:id="create" layoutX="307.0" layoutY="594.0" mnemonicParsing="false" onMouseEntered="#changeCur"   onAction="#createAction" prefHeight="25.0" prefWidth="153.25" text="Create A New Action Item" />
+      <TextField alignment="CENTER" editable="false" layoutY="44.0" prefHeight="25.0" prefWidth="623.0" text="Action Items">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </TextField>
+      <Label fx:id="date1" layoutX="497.0" layoutY="320.0" text="dd-mm-yyyy" />
+      <HBox layoutY="2.0">
+         <children>
+            <Button layoutY="2.0" maxWidth="124.6" mnemonicParsing="false" onAction="#goToConsole" prefWidth="124.6" text="Console">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Button>
+            <Button layoutX="70.0" layoutY="10.0" maxWidth="124.6" mnemonicParsing="false" prefWidth="124.6" text="Action Items">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Button>
+            <Button layoutX="154.0" layoutY="10.0" maxWidth="124.6" mnemonicParsing="false" onAction="#goToMembers" prefWidth="124.6" text="Members">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Button>
+            <Button layoutX="264.0" layoutY="10.0" maxWidth="124.6" mnemonicParsing="false" onAction="#goToTeams" prefWidth="124.6" text="Teams">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Button>
+            <Button layoutX="383.0" layoutY="12.0" maxWidth="124.6" mnemonicParsing="false" prefWidth="124.6" text="Quit">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <Label fx:id="onof" layoutX="561.0" layoutY="26.0" prefHeight="17.0" prefWidth="54.0" text="offline">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
