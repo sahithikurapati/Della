@@ -243,6 +243,8 @@ public class ConsoleController implements Initializable,ControlledScreen{
     //--------------------------
     @FXML
     private void goToActionItems(ActionEvent event){
+         try{DellaActionItems.mainContainer.loadScreen(screen2ID, screen2File);
+         }catch(Exception e){}
        myController.setScreen(screen2ID);
     }
     @FXML

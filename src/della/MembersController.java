@@ -89,6 +89,7 @@ public class MembersController implements Initializable,ControlledScreen{
    
     @FXML
     private void addMember(ActionEvent event) {
+        
         if(!connectivity){
             new AlertMessage("presently unavailable","offline mode running","");
             return;

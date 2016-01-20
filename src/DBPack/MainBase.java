@@ -28,7 +28,7 @@ public class MainBase {
 }//end main
 	public boolean getInternetStatus(){
 		try{
-			final String userName = "201585138";
+			final String userName = "201585072";
 			final String password = "msit123";
 			Authenticator.setDefault(
 			   new Authenticator() {
@@ -48,6 +48,7 @@ public class MainBase {
 			HttpURLConnection connect = (HttpURLConnection)url.openConnection();
 			connect.connect();
 			if(connect.getResponseCode() == 200){
+                                System.out.println(connect.getResponseCode());
 				return true;
 			}
 
